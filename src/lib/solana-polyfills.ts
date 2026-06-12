@@ -1,10 +1,12 @@
-import { Buffer } from "buffer";
+import { Buffer as BrowserBuffer } from "buffer";
 
-(globalThis as any).Buffer = Buffer;
+export const Buffer = BrowserBuffer;
+
+(globalThis as any).Buffer = BrowserBuffer;
 
 if (typeof window !== "undefined") {
-  (window as any).Buffer = Buffer;
+  (window as any).Buffer = BrowserBuffer;
 }
 
-console.log("BUFFER", Buffer);
-console.log("BUFFER FROM", Buffer?.from);
+console.log("BUFFER", BrowserBuffer);
+console.log("BUFFER FROM", BrowserBuffer?.from);
