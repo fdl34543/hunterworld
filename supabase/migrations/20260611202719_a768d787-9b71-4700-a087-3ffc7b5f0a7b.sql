@@ -1,0 +1,1 @@
+ALTER TABLE public.players ADD COLUMN last_beer_at timestamp with time zone;

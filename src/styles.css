@@ -1,0 +1,472 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.129 0.042 264.695);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+/* Voxel Town animations */
+@keyframes voxel-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes study-book {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+@keyframes study-spark {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+.animate-voxel-idle { animation: voxel-idle 1.6s ease-in-out infinite; }
+.animate-study-book { animation: study-book 1.4s ease-in-out infinite; display: inline-block; }
+.animate-study-spark { animation: study-spark 1.2s ease-in-out infinite; display: inline-block; }
+
+/* Solana wallet-adapter minimal styling (we skip its bundled CSS because it
+   uses a Google Fonts @import that LightningCSS can't resolve). */
+.wallet-adapter-button {
+  background: #f97316;
+  color: #fff;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.625rem 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1;
+}
+.wallet-adapter-button:hover { background: #ea580c; }
+.wallet-adapter-button[disabled] { opacity: 0.55; cursor: not-allowed; }
+.wallet-adapter-button-start-icon,
+.wallet-adapter-button-end-icon {
+  display: inline-flex;
+  align-items: center;
+}
+.wallet-adapter-button-start-icon img,
+.wallet-adapter-button-end-icon img,
+.wallet-adapter-button-start-icon svg,
+.wallet-adapter-button-end-icon svg { width: 1.25rem; height: 1.25rem; }
+
+.wallet-adapter-modal { position: fixed; inset: 0; z-index: 50; }
+.wallet-adapter-modal-overlay {
+  position: absolute; inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 0;
+}
+.wallet-adapter-modal-container {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  height: 100%;
+  padding: 1rem;
+  z-index: 1;
+}
+.wallet-adapter-modal-wrapper {
+  position: relative;
+  width: 100%; max-width: 360px;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+.wallet-adapter-modal-title {
+  font-size: 1.125rem; font-weight: 700;
+  color: #0f172a; margin: 0 0 0.75rem;
+  text-align: center;
+}
+.wallet-adapter-modal-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.wallet-adapter-modal-list li { width: 100%; }
+.wallet-adapter-modal-list .wallet-adapter-button {
+  width: 100%; justify-content: space-between;
+  background: #f1f5f9; color: #0f172a;
+}
+.wallet-adapter-modal-list .wallet-adapter-button:hover { background: #e2e8f0; }
+.wallet-adapter-modal-button-close {
+  position: absolute; top: 0.5rem; right: 0.5rem;
+  background: transparent; border: 0; cursor: pointer;
+  width: 2rem; height: 2rem; border-radius: 9999px;
+  color: #475569;
+}
+.wallet-adapter-modal-button-close:hover { background: #f1f5f9; }
+.wallet-adapter-modal-list-more {
+  margin-top: 0.75rem;
+  background: transparent; border: 0; cursor: pointer;
+  font-size: 0.85rem; color: #64748b;
+  display: flex; align-items: center; gap: 0.25rem;
+}
+.wallet-adapter-dropdown { position: relative; display: inline-block; }
+.wallet-adapter-dropdown-list {
+  position: absolute; top: 100%; right: 0; margin-top: 0.5rem;
+  background: #fff; border-radius: 0.75rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  padding: 0.5rem; min-width: 200px;
+  display: none; list-style: none;
+  z-index: 60;
+}
+.wallet-adapter-dropdown-list-active { display: block; }
+.wallet-adapter-dropdown-list-item {
+  padding: 0.5rem 0.75rem; border-radius: 0.5rem;
+  cursor: pointer; color: #0f172a;
+  background: transparent; border: 0; width: 100%; text-align: left;
+}
+.wallet-adapter-dropdown-list-item:hover { background: #f1f5f9; }
+
+/* Drunk effect — camera shake + woozy color filter applied while a beer kicks in. */
+@keyframes drunk-shake {
+  0%   { transform: translate(0,0) rotate(0deg) scale(1);        filter: hue-rotate(0deg) saturate(1)   blur(0); }
+  10%  { transform: translate(-8px,4px) rotate(-1.2deg) scale(1.01); filter: hue-rotate(25deg) saturate(1.3) blur(0.6px); }
+  20%  { transform: translate(7px,-5px) rotate(1.4deg) scale(0.99);  filter: hue-rotate(-20deg) saturate(1.4) blur(1px); }
+  35%  { transform: translate(-6px,6px) rotate(-1deg) scale(1.02);   filter: hue-rotate(40deg) saturate(1.5) blur(0.8px); }
+  50%  { transform: translate(8px,3px) rotate(1.6deg) scale(1.01);   filter: hue-rotate(-35deg) saturate(1.6) blur(1.2px); }
+  65%  { transform: translate(-5px,-4px) rotate(-0.8deg) scale(1);   filter: hue-rotate(30deg) saturate(1.3) blur(0.8px); }
+  80%  { transform: translate(4px,5px) rotate(1deg) scale(1.01);     filter: hue-rotate(-15deg) saturate(1.2) blur(0.5px); }
+  100% { transform: translate(0,0) rotate(0deg) scale(1);        filter: hue-rotate(0deg) saturate(1)   blur(0); }
+}
+.drunk-shake { animation-name: drunk-shake; animation-iteration-count: 1; animation-timing-function: ease-in-out; will-change: transform, filter; }
+.drunk-shake-1 { animation-timing-function: ease-in-out; }
+.drunk-shake-2 { animation-timing-function: cubic-bezier(.5,0,.5,1); }
+.drunk-shake-3 { animation-timing-function: cubic-bezier(.6,-0.2,.4,1.2); }
+
+/* =========================================================
+   MMORPG modal theme
+   Lightweight overlay + panel styling that auto-themes any
+   existing modal markup by overriding common Tailwind tokens
+   when nested inside a .mmo-panel container.
+   ========================================================= */
+
+.mmo-overlay {
+  background:
+    radial-gradient(ellipse at center, rgba(20, 10, 4, 0.55), rgba(0, 0, 0, 0.85));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.mmo-panel {
+  position: relative;
+  color: #ecd9a8;
+  font-family: "Cinzel", "Trajan Pro", "Georgia", serif;
+  background:
+    linear-gradient(180deg, rgba(58, 36, 18, 0.97), rgba(30, 18, 8, 0.97)),
+    repeating-linear-gradient(45deg, rgba(255, 220, 150, 0.025) 0 2px, transparent 2px 5px) !important;
+  border: 2px solid #b08534 !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 210, 120, 0.25),
+    inset 0 0 40px rgba(0, 0, 0, 0.55),
+    0 22px 60px rgba(0, 0, 0, 0.65),
+    0 0 0 4px rgba(0, 0, 0, 0.4) !important;
+}
+.mmo-panel::before,
+.mmo-panel::after { content: none; }
+
+/* Headings + text recoloring inside MMORPG panels */
+.mmo-panel h1,
+.mmo-panel h2,
+.mmo-panel h3,
+.mmo-panel .text-slate-900,
+.mmo-panel .text-amber-900 {
+  color: #f6d784 !important;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6), 0 0 12px rgba(245, 180, 80, 0.35);
+  letter-spacing: 0.03em;
+}
+.mmo-panel .text-slate-800,
+.mmo-panel .text-slate-700 { color: #e6cf95 !important; }
+.mmo-panel .text-slate-600,
+.mmo-panel .text-amber-900\/80 { color: #c8ad75 !important; }
+.mmo-panel .text-amber-900\/70 { color: #c8ad75 !important; }
+.mmo-panel .text-slate-500,
+.mmo-panel .text-amber-700 { color: #a48a5c !important; }
+.mmo-panel .text-slate-400 { color: #806a45 !important; }
+.mmo-panel .text-emerald-600,
+.mmo-panel .text-emerald-700 { color: #7ce3a4 !important; }
+.mmo-panel .text-rose-600,
+.mmo-panel .text-rose-700 { color: #ff9080 !important; }
+.mmo-panel .text-sky-500,
+.mmo-panel .text-sky-600 { color: #7fd0ff !important; }
+.mmo-panel .text-sky-700 { color: #a8e0ff !important; }
+.mmo-panel .text-violet-600 { color: #d4b6ff !important; }
+.mmo-panel .text-amber-600 { color: #f5c060 !important; }
+
+/* Borders + dividers */
+.mmo-panel .border-b,
+.mmo-panel .border-t,
+.mmo-panel .border-slate-200,
+.mmo-panel .border-rose-200,
+.mmo-panel .border-amber-300,
+.mmo-panel .border-amber-200 {
+  border-color: #7a5828 !important;
+}
+
+/* Inner surfaces (cards, list items) */
+.mmo-panel .bg-white,
+.mmo-panel .bg-slate-50,
+.mmo-panel .bg-slate-100,
+.mmo-panel .bg-amber-50,
+.mmo-panel .bg-rose-50,
+.mmo-panel .from-amber-50,
+.mmo-panel .to-rose-50,
+.mmo-panel .to-emerald-50 {
+  background:
+    linear-gradient(180deg, rgba(46, 28, 12, 0.92), rgba(26, 16, 8, 0.92)) !important;
+  border-color: #7a5828 !important;
+  color: #e6cf95 !important;
+}
+.mmo-panel .bg-amber-200\/60,
+.mmo-panel .bg-amber-100 {
+  background: rgba(0, 0, 0, 0.35) !important;
+  color: #f0c878 !important;
+}
+/* Highlighted row (e.g. "you" in leaderboard) */
+.mmo-panel .bg-sky-50 {
+  background: linear-gradient(180deg, rgba(80, 55, 22, 0.85), rgba(50, 32, 12, 0.85)) !important;
+  border-color: #d6a64a !important;
+}
+.mmo-panel .ring-sky-200 { --tw-ring-color: #d6a64a !important; }
+.mmo-panel .bg-sky-50 .text-slate-900,
+.mmo-panel .bg-sky-50 .truncate { color: #ffe9a8 !important; }
+.mmo-panel .bg-slate-200 {
+  background: linear-gradient(180deg, #3d2a18, #1d130a) !important;
+  color: #d4b478 !important;
+  border: 1px solid #7a5828;
+}
+.mmo-panel .bg-slate-200:hover,
+.mmo-panel .hover\:bg-slate-300:hover,
+.mmo-panel .hover\:bg-amber-300:hover {
+  background: linear-gradient(180deg, #4d3522, #281a0e) !important;
+  filter: brightness(1.05);
+}
+
+/* Action buttons re-skinned to forged-metal look */
+.mmo-panel .bg-orange-500,
+.mmo-panel .bg-amber-500,
+.mmo-panel .bg-emerald-500,
+.mmo-panel .bg-rose-500,
+.mmo-panel .bg-blue-500,
+.mmo-panel .bg-violet-500 {
+  color: #fff7d6 !important;
+  border: 1px solid #f0c060 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 140, 0.55),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.5) !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  font-family: "Cinzel", "Georgia", serif;
+  letter-spacing: 0.04em;
+}
+.mmo-panel .bg-orange-500 { background: linear-gradient(180deg, #c97a2b, #6e3410) !important; }
+.mmo-panel .bg-orange-500:hover:not(:disabled),
+.mmo-panel .hover\:bg-orange-600:hover { filter: brightness(1.12); }
+.mmo-panel .bg-amber-500 { background: linear-gradient(180deg, #c19a2b, #6e5010) !important; }
+.mmo-panel .bg-emerald-500 { background: linear-gradient(180deg, #2da55a, #0f5a30) !important; border-color: #6fe09a !important; }
+.mmo-panel .bg-rose-500 { background: linear-gradient(180deg, #b8362f, #5e1612) !important; border-color: #ff8a76 !important; }
+.mmo-panel .bg-blue-500 { background: linear-gradient(180deg, #2f6fb8, #1a3d6f) !important; border-color: #7fb4e8 !important; }
+.mmo-panel .bg-violet-500 { background: linear-gradient(180deg, #6a3fb8, #2e1a6f) !important; border-color: #b890ff !important; }
+
+/* Disabled buttons */
+.mmo-panel .bg-slate-300,
+.mmo-panel button[disabled],
+.mmo-panel button:disabled {
+  background: linear-gradient(180deg, #3a2a1a, #1f140a) !important;
+  color: #806a45 !important;
+  border-color: #4a3520 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 210, 120, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.5) !important;
+  text-shadow: none;
+}
+
+/* Progress bars */
+.mmo-panel .bg-slate-200.h-2,
+.mmo-panel .h-2.bg-slate-200 {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid #4a3520;
+}
+
+/* Tab underline accent */
+.mmo-panel .border-orange-500 { border-color: #f0c060 !important; }
+.mmo-panel .text-orange-600 { color: #f5c060 !important; }
+
+/* Ring focus tweaks on portal cards */
+.mmo-panel .ring-emerald-500 { --tw-ring-color: #6fe09a !important; }
+.mmo-panel .hover\:ring-orange-400:hover { --tw-ring-color: #f0c060 !important; }
+
+/* Lock/level chip on portal cards */
+.mmo-panel .bg-black\/55 { background: rgba(0, 0, 0, 0.7) !important; }
+
+/* Inputs inside profile/edit modals */
+.mmo-panel input[type="text"],
+.mmo-panel input[type="number"],
+.mmo-panel input:not([type]),
+.mmo-panel textarea,
+.mmo-panel select {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid #7a5828 !important;
+  color: #f0d9a8 !important;
+}
+.mmo-panel input::placeholder,
+.mmo-panel textarea::placeholder { color: #806a45 !important; }
+
+/* MMO themed scrollbar */
+.mmo-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #b8862c #2a1a0a;
+}
+.mmo-scroll::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.mmo-scroll::-webkit-scrollbar-track {
+  background: linear-gradient(to right, #1a0f04, #2a1a0a, #1a0f04);
+  border-left: 1px solid #5a3a1a;
+  border-right: 1px solid #5a3a1a;
+}
+.mmo-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #d4a04a, #b8862c 50%, #8a5e1a);
+  border: 1px solid #3a2410;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 220, 150, 0.4);
+}
+.mmo-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #e8b85a, #cc9a3a 50%, #a06e22);
+}
+.mmo-scroll::-webkit-scrollbar-corner { background: #1a0f04; }
