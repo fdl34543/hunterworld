@@ -14,9 +14,9 @@ const rpcWebsocketsBrowser = fileURLToPath(
 const browserBuffer = fileURLToPath(
   new URL("./node_modules/buffer/index.js", import.meta.url),
 );
-const browserBufferShim = fileURLToPath(
-  new URL("./src/lib/browser-buffer.ts", import.meta.url),
-);
+// const browserBufferShim = fileURLToPath(
+//   new URL("./src/lib/browser-buffer.ts", import.meta.url),
+// );
 const solanaMobileWalletSsrStub = fileURLToPath(
   new URL("./src/integrations/solana/mobile-wallet-adapter-ssr-stub.ts", import.meta.url),
 );
@@ -65,8 +65,15 @@ const bufferEnvAliasPlugin = {
   },
   resolveId(source: string, _importer: string | undefined, options: { ssr?: boolean }) {
     if (source !== "buffer") return null;
-    if (options?.ssr) return { id: "node:buffer", external: true };
-    return browserBufferShim;
+
+    if (options?.ssr) {
+      return {
+        id: "node:buffer",
+        external: true,
+      };
+    }
+
+    return null;
   },
 };
 
