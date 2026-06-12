@@ -22,7 +22,7 @@ void timingSafeEqual;
 
 export function buildSignInMessage(address: string, issuedAt: string, nonce: string) {
   return [
-    "Voxel Town wants you to sign in with your Solana account.",
+    "Hunter World wants you to sign in with your Solana account.",
     `Address: ${address}`,
     `Issued At: ${issuedAt}`,
     `Nonce: ${nonce}`,
