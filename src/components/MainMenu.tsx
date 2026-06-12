@@ -11,7 +11,7 @@ import {
 } from "@/game/characters";
 import { MAPS } from "@/game/maps";
 import { SEASONS, getCurrentSeason } from "@/game/seasons";
-import bgImage from "@/assets/map-town.jpg";
+import bgImage from "@/assets/landing.png";
 import logoImg from "@/assets/logo.png";
 import { Link } from "@tanstack/react-router";
 
