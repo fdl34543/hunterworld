@@ -1,7 +1,8 @@
-import { Buffer as BrowserBuffer } from "buffer/index.js";
+import bufferModule from "buffer/index.js";
 
-export const Buffer = BrowserBuffer;
+console.log("BUFFER MODULE", bufferModule);
+console.log("BUFFER MODULE BUFFER", bufferModule?.Buffer);
 
-export default {
-  Buffer: BrowserBuffer,
-};
+export const Buffer = bufferModule.Buffer;
+
+export default bufferModule;
