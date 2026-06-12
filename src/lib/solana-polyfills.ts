@@ -10,6 +10,7 @@
 // as a bare import and do not alias it to `/node_modules/buffer/index.js`.
 import { Buffer as BrowserBuffer } from "buffer";
 
+
 export const Buffer = BrowserBuffer;
 
 type BrowserRuntime = Record<string, unknown> & {
@@ -26,12 +27,14 @@ function hasUsableBuffer(value: unknown): value is { from: (...args: unknown[]) 
 }
 
 if (typeof window !== "undefined") {
-  const runtime = globalThis as BrowserRuntime;
-  if (!hasUsableBuffer(runtime.Buffer)) runtime.Buffer = BrowserBuffer;
-  runtime.global ??= globalThis;
-  runtime.process ??= { env: {}, browser: true };
-  runtime.process.env ??= {};
-  runtime.process.browser ??= true;
+  (globalThis as any).Buffer = BrowserBuffer;
+  (window as any).Buffer = BrowserBuffer;
+
+  (globalThis as any).global = globalThis;
+  (globalThis as any).process = {
+    env: {},
+    browser: true,
+  };
 }
 
 console.log("POLYFILL BUFFER", typeof Buffer);
