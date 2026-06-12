@@ -33,3 +33,7 @@ if (typeof window !== "undefined") {
   runtime.process.env ??= {};
   runtime.process.browser ??= true;
 }
+
+console.log("POLYFILL BUFFER", typeof Buffer);
+console.log("GLOBAL BUFFER", typeof globalThis.Buffer);
+console.log("WINDOW BUFFER", typeof (window as any).Buffer);
