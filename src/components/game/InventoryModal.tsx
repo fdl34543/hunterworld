@@ -39,28 +39,31 @@ export function InventoryModal({
       className="absolute inset-0 z-10 flex items-center justify-center mmo-overlay"
       onClick={onClose}
     >
-      <div className="w-full max-w-3xl mmo-panel rounded-2xl p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-2xl font-extrabold text-slate-900">
+      <div
+        className="flex max-h-[92vh] w-full max-w-3xl flex-col mmo-panel rounded-2xl p-3 shadow-2xl sm:p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="mb-3 flex items-center justify-between sm:mb-4">
+          <h2 className="text-lg font-extrabold text-slate-900 sm:text-2xl">
             🎒 Inventory{" "}
-            <span className="ml-2 text-xs font-medium text-slate-500">
+            <span className="ml-2 hidden text-xs font-medium text-slate-500 sm:inline">
               Drag to equip · Right-click to discard
             </span>
           </h2>
           <button
             onClick={onClose}
-            className="rounded-md bg-slate-200 px-3 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-300"
+            className="shrink-0 rounded-md bg-slate-200 px-3 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-300"
           >
             Close
           </button>
         </div>
-        <div className="flex gap-4">
+        <div className="mmo-scroll flex flex-1 flex-col gap-3 overflow-y-auto pr-1 sm:flex-row sm:gap-4 sm:overflow-visible sm:pr-0">
           {/* Wear panel */}
-          <div className="flex shrink-0 flex-col items-center gap-3 rounded-xl bg-violet-50 p-3">
+          <div className="flex shrink-0 flex-col items-center gap-2 rounded-xl bg-violet-50 p-2 sm:gap-3 sm:p-3">
             <div className="text-xs font-bold uppercase tracking-wider text-violet-700">
               Worn
             </div>
-            <div className="flex flex-col items-center gap-2">
+            <div className="grid grid-cols-5 gap-2 sm:flex sm:flex-col sm:items-center">
               {WEAR_KIND_BY_INDEX.map((kind, idx) => {
                 const it = wear[idx] ?? null;
                 const m = WEAR_SLOT_META[idx];
@@ -86,8 +89,8 @@ export function InventoryModal({
             </div>
           </div>
           {/* Inventory grid */}
-          <div className="flex-1">
-            <div className="grid grid-cols-6 gap-2">
+          <div className="flex-1 sm:overflow-visible">
+            <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
               {Array.from({ length: INVENTORY_SIZE }).map((_, i) => {
                 const it = inventoryBySlot[i] ?? null;
                 return (
@@ -108,8 +111,11 @@ export function InventoryModal({
             </div>
           </div>
         </div>
-        <p className="mt-4 text-center text-xs text-slate-500">
+        <p className="mt-3 hidden text-center text-xs text-slate-500 sm:mt-4 sm:block">
           Drag a weapon/armor to the worn panel to equip · Press 1–6 to quick-use top row · Tab to toggle
+        </p>
+        <p className="mt-2 text-center text-[11px] text-slate-500 sm:hidden">
+          Tap to use · Long-press for details · Drag to equip
         </p>
       </div>
     </div>

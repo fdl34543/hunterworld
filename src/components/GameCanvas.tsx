@@ -312,7 +312,9 @@ export function GameCanvas({
     img.src = player.custom_avatar_url;
   }, [player.custom_avatar_url]);
   const [editOpen, setEditOpen] = useState(false);
-  const [statsOpen, setStatsOpen] = useState(true);
+  const [statsOpen, setStatsOpen] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth >= 640 : true,
+  );
   const [chatMinimized, setChatMinimized] = useState(false);
   const [invOpen, setInvOpen] = useState(false);
   const [dragId, setDragId] = useState<string | null>(null);
@@ -1859,7 +1861,7 @@ export function GameCanvas({
 
       <div
         className={`pointer-events-none absolute left-2 top-2 flex flex-col gap-2 sm:left-4 sm:top-4 sm:gap-3 ${
-          isSpectator ? "w-[calc(100vw-1rem)] sm:w-64" : "w-[calc(100vw-1rem)] sm:w-64"
+          isSpectator ? "w-[15rem] sm:w-64" : "w-[15rem] sm:w-64"
         }`}
       >
         <div className="flex items-start gap-2">
@@ -1916,7 +1918,7 @@ export function GameCanvas({
             />
             <button
               onClick={() => setLeaderboardOpen(true)}
-              className="pointer-events-auto rounded-xl bg-black/60 px-3 py-2 text-sm font-bold text-white shadow-lg backdrop-blur hover:bg-black/70 flex items-center justify-center gap-2"
+              className="pointer-events-auto rounded-xl bg-black/60 px-3 py-1.5 text-xs font-bold text-white shadow-lg backdrop-blur hover:bg-black/70 flex items-center justify-center gap-2 sm:py-2 sm:text-sm"
             >
               <span>🏆</span> Leaderboard
             </button>
@@ -1986,17 +1988,33 @@ export function GameCanvas({
       )}
 
       {!isSpectator && nearby && !openPlace && (
-        <div className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 rounded-full bg-black/70 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur">
-          {nearby.emoji} {nearby.name} — Press{" "}
-          <kbd className="rounded bg-white/20 px-1.5 py-0.5 font-mono text-xs">E</kbd> to interact
-        </div>
+        <button
+          type="button"
+          onClick={() => setOpenPlace(nearby)}
+          className="pointer-events-auto absolute bottom-24 left-4 z-20 rounded-full bg-black/70 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur transition hover:bg-black/85 active:scale-95 sm:bottom-auto sm:left-1/2 sm:top-6 sm:-translate-x-1/2"
+        >
+          {nearby.emoji} {nearby.name}
+          <span className="hidden sm:inline">
+            {" "}— Press{" "}
+            <kbd className="rounded bg-white/20 px-1.5 py-0.5 font-mono text-xs">E</kbd> to interact
+          </span>
+          <span className="ml-2 sm:hidden">— Tap to interact</span>
+        </button>
       )}
 
       {!isSpectator && nearbyPortal && !nearby && !portalOpen && !openPlace && (
-        <div className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 rounded-full bg-purple-700/80 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur">
-          🌀 Portal — Press{" "}
-          <kbd className="rounded bg-white/20 px-1.5 py-0.5 font-mono text-xs">E</kbd> to travel
-        </div>
+        <button
+          type="button"
+          onClick={() => setPortalOpen(true)}
+          className="pointer-events-auto absolute bottom-24 left-4 z-20 rounded-full bg-purple-700/80 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur transition hover:bg-purple-700 active:scale-95 sm:bottom-auto sm:left-1/2 sm:top-6 sm:-translate-x-1/2"
+        >
+          🌀 Portal
+          <span className="hidden sm:inline">
+            {" "}— Press{" "}
+            <kbd className="rounded bg-white/20 px-1.5 py-0.5 font-mono text-xs">E</kbd> to travel
+          </span>
+          <span className="ml-2 sm:hidden">— Tap to travel</span>
+        </button>
       )}
 
       {!isSpectator && portalOpen && (
@@ -2224,12 +2242,12 @@ export function GameCanvas({
           onClaim={(r) => {
             // Demo-only claim — no on-chain rewards yet, so no server award.
             showToast(
-              `Claimed +${r.gold} gold, +${r.sol} SOL, +${r.usdc} USDC`,
+              `Claimed +${r.gold} gold, +${r.sol} SOL, +${r.usdc} USDC (demo)`,
             );
             setRealmOpen(false);
           }}
           onStakeConfirmed={(amt) => {
-            showToast(`Staked ${amt} $Realm`);
+            showToast(`Staked ${amt} $Realm (demo)`);
             setRealmOpen(false);
           }}
           onClose={() => setRealmOpen(false)}

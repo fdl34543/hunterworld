@@ -301,6 +301,25 @@
 .mmo-panel::before,
 .mmo-panel::after { content: none; }
 
+/* Themed scrollbar used inside MMORPG panels */
+.mmo-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #b08534 rgba(20, 10, 4, 0.4);
+}
+.mmo-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.mmo-scroll::-webkit-scrollbar-track {
+  background: rgba(20, 10, 4, 0.4);
+  border-radius: 8px;
+}
+.mmo-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d6a64a, #8a6322);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.mmo-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f0bf5a, #a07a2a);
+}
+
 /* Headings + text recoloring inside MMORPG panels */
 .mmo-panel h1,
 .mmo-panel h2,
