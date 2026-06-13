@@ -1,5 +1,6 @@
 import type { Profile } from "@/game/types";
 import { xpProgress } from "@/lib/xp";
+import { useState } from "react";
 
 export function PlayerProfileCard({
   profile,
@@ -34,6 +35,7 @@ export function PlayerProfileCard({
   onEdit: () => void;
   onToggleStats: () => void;
 }) {
+  const [mobileExpanded, setMobileExpanded] = useState(false);
   const pct = Math.max(0, Math.min(100, (hp / maxHp) * 100));
   const ePct = Math.max(0, Math.min(100, (energy / Math.max(1, maxEnergy)) * 100));
   const xpInfo = xpProgress(xp);
@@ -58,7 +60,7 @@ export function PlayerProfileCard({
             Lv {xpInfo.level} · {profile.job}
           </div>
         </div>
-        <div className="flex shrink-0 flex-col gap-1">
+        <div className="hidden shrink-0 flex-col gap-1 sm:flex">
           <button
             onClick={onEdit}
             className="rounded-md bg-white/10 px-1.5 py-0.5 text-[10px] font-semibold hover:bg-white/20 sm:px-2 sm:py-1 sm:text-[11px]"
@@ -72,6 +74,12 @@ export function PlayerProfileCard({
             {statsOpen ? "Hide" : "Stats"}
           </button>
         </div>
+        <button
+          onClick={() => setMobileExpanded((v) => !v)}
+          className="shrink-0 rounded-md bg-white/10 px-2 py-1 text-[10px] font-semibold hover:bg-white/20 sm:hidden"
+        >
+          {mobileExpanded ? "Hide" : "Show all"}
+        </button>
       </div>
       <div className="mt-2">
         <div className="flex items-center justify-between text-[10px] font-semibold text-white/70">
@@ -87,7 +95,7 @@ export function PlayerProfileCard({
           />
         </div>
       </div>
-      <div className="mt-1.5">
+      <div className={`mt-1.5 ${mobileExpanded ? "" : "hidden sm:block"}`}>
         <div className="flex items-center justify-between text-[10px] font-semibold text-white/70">
           <span>⚡ Energy</span>
           <span className="tabular-nums">{energy} / {maxEnergy}</span>
@@ -99,7 +107,7 @@ export function PlayerProfileCard({
           />
         </div>
       </div>
-      <div className="mt-1.5">
+      <div className={`mt-1.5 ${mobileExpanded ? "" : "hidden sm:block"}`}>
         <div className="flex items-center justify-between text-[10px] font-semibold text-white/70">
           <span>⭐ XP</span>
           <span className="tabular-nums">
@@ -113,6 +121,22 @@ export function PlayerProfileCard({
           />
         </div>
       </div>
+      {mobileExpanded && (
+        <div className="mt-2 flex gap-1 sm:hidden">
+          <button
+            onClick={onEdit}
+            className="flex-1 rounded-md bg-white/10 px-2 py-1 text-[10px] font-semibold hover:bg-white/20"
+          >
+            Edit
+          </button>
+          <button
+            onClick={onToggleStats}
+            className="flex-1 rounded-md bg-white/10 px-2 py-1 text-[10px] font-semibold hover:bg-white/20"
+          >
+            {statsOpen ? "Hide stats" : "Stats"}
+          </button>
+        </div>
+      )}
       {statsOpen && (
         <div className="mt-2 grid grid-cols-3 gap-1 text-center text-[10px] sm:mt-3 sm:gap-2 sm:text-[11px]">
           <div className="rounded-md bg-white/10 py-1">
