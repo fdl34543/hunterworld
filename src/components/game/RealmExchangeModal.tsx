@@ -71,7 +71,7 @@ export function RealmExchangeModal({ gold, onClaim, onStakeConfirmed, onClose }:
             <div className="mb-1 text-3xl">🔒</div>
             <h2 className="text-2xl font-extrabold text-slate-900">Stake $Hunt</h2>
             <p className="mb-4 text-sm text-slate-600">
-              Enter the amount of $Hunt you want to stake. (Demo — no on-chain tx.)
+              Enter the amount of $Hunt you want to stake. 
             </p>
 
             <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-500">
