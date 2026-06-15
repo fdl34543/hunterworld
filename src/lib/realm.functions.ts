@@ -23,6 +23,7 @@ export type RealmClaimResult = {
     gold: number;
     last_realm_claim_at: string | null;
   };
+  walletAddress: string | null;
 };
 
 export const claimRealmReward = createServerFn({ method: "POST" })
@@ -31,7 +32,7 @@ export const claimRealmReward = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     const { data: cur, error } = await supabase
       .from("players")
-      .select("gold,last_realm_claim_at")
+      .select("gold,last_realm_claim_at,wallet_address")
       .eq("user_id", userId)
       .single();
     if (error) dbFail(error);
@@ -65,5 +66,6 @@ export const claimRealmReward = createServerFn({ method: "POST" })
         gold: row.gold,
         last_realm_claim_at: row.last_realm_claim_at,
       },
+      walletAddress: cur.wallet_address ?? null,
     };
   });

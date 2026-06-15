@@ -2250,14 +2250,18 @@ export function GameCanvas({
             try {
               const res = await claimRealm.mutateAsync();
               const { gold: g, sol, usdc } = res.rewards;
-              showToast(`Claimed +${g} gold, +${sol} SOL`);
+              const w = res.walletAddress;
+              const shortW = w ? `${w.slice(0, 4)}...${w.slice(-4)}` : "your wallet";
+              showToast(
+                `Claimed +${g} gold, +${sol} SOL sent to ${shortW}`,
+              );
               setRealmOpen(false);
             } catch (e: any) {
               showToast(e?.message ?? "Claim failed");
             }
           }}
           onStakeConfirmed={(amt) => {
-            showToast(`Staked ${amt} $Hunt `);
+            showToast(`Staked ${amt} $Hunt)`);
             setRealmOpen(false);
           }}
           onClose={() => setRealmOpen(false)}
