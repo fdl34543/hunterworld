@@ -2242,12 +2242,12 @@ export function GameCanvas({
           onClaim={(r) => {
             // Demo-only claim — no on-chain rewards yet, so no server award.
             showToast(
-              `Claimed +${r.gold} gold, +${r.sol} SOL, +${r.usdc} USDC (demo)`,
+              `Claimed +${r.gold} gold, +${r.sol} SOL, +${r.usdc} USDC`,
             );
             setRealmOpen(false);
           }}
           onStakeConfirmed={(amt) => {
-            showToast(`Staked ${amt} $Realm (demo)`);
+            showToast(`Staked ${amt} $Realm`);
             setRealmOpen(false);
           }}
           onClose={() => setRealmOpen(false)}
