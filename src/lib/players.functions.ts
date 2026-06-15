@@ -55,6 +55,7 @@ type DbPlayer = {
   equipped_armor: string | null;
   last_boss_at: string | null;
   last_boss_at_by_map: Record<string, string> | null;
+  last_realm_claim_at: string | null;
   created_at: string;
   updated_at: string;
 };

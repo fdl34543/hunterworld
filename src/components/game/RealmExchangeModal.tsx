@@ -1,33 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { REALM_CLAIM_COOLDOWN_MS } from "@/lib/realm.functions";
 
 // Placeholder contract address — replace with the real one when available.
 export const REALM_CA = "REPLACE_WITH_CONTRACT_ADDRESS";
 
 type Props = {
   gold: number;
-  onClaim: (rewards: { gold: number; sol: number; usdc: number }) => void;
+  lastClaimAt: number | null;
+  claiming?: boolean;
+  onClaim: () => void;
   onStakeConfirmed: (amount: number) => void;
   onClose: () => void;
 };
 
-export function RealmExchangeModal({ gold, onClaim, onStakeConfirmed, onClose }: Props) {
+export function RealmExchangeModal({
+  gold,
+  lastClaimAt,
+  claiming,
+  onClaim,
+  onStakeConfirmed,
+  onClose,
+}: Props) {
   const [view, setView] = useState<"main" | "stake">("main");
   const [stakeInput, setStakeInput] = useState("");
+  const [, force] = useState(0);
+
+  const now = Date.now();
+  const remainingMs = lastClaimAt
+    ? Math.max(0, REALM_CLAIM_COOLDOWN_MS - (now - lastClaimAt))
+    : 0;
+  const ready = remainingMs <= 0;
+
+  useEffect(() => {
+    if (ready) return;
+    const t = setInterval(() => force((n) => n + 1), 1000);
+    return () => clearInterval(t);
+  }, [ready]);
+
+  const fmt = (ms: number) => {
+    const s = Math.ceil(ms / 1000);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    if (h > 0) return `${h}h ${m}m`;
+    if (m > 0) return `${m}m ${sec}s`;
+    return `${sec}s`;
+  };
 
   const buyUrl = `https://pump.fun/coin/${REALM_CA}`;
 
   return (
-    <div className="absolute inset-0 z-10 flex items-center justify-center mmo-overlay">
+    <div className="absolute inset-0 z-40 flex items-center justify-center mmo-overlay">
       <div className="w-full max-w-sm mmo-panel rounded-2xl p-6 shadow-2xl">
         {view === "main" ? (
           <>
             <div className="mb-1 text-3xl">🪙</div>
-            <h2 className="text-2xl font-extrabold text-slate-900">Hunter Exchange</h2>
+            <h2 className="text-2xl font-extrabold text-slate-900">Realm Exchange</h2>
             <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-emerald-600">
               Trader
             </p>
             <p className="mb-4 text-sm text-slate-600">
-              Buy, stake, and claim $Hunt rewards.
+              Buy, stake, and claim $HUNT rewards.
             </p>
 
             <a
@@ -36,27 +69,30 @@ export function RealmExchangeModal({ gold, onClaim, onStakeConfirmed, onClose }:
               rel="noopener noreferrer"
               className="mb-2 block w-full rounded-lg bg-orange-500 px-4 py-2.5 text-center font-bold text-white shadow hover:bg-orange-600"
             >
-              Buy $Hunt on pump.fun ↗
+              Buy $HUNT on pump.fun ↗
             </a>
 
             <button
               onClick={() => setView("stake")}
               className="mb-2 w-full rounded-lg bg-indigo-500 px-4 py-2.5 font-bold text-white shadow hover:bg-indigo-600"
             >
-              Stake $Hunt
+              Stake $HUNT
             </button>
 
             <button
-              onClick={() =>
-                onClaim({
-                  gold: 25,
-                  sol: Number((Math.random() * 0.01).toFixed(4)),
-                  usdc: Number((Math.random() * 0.5).toFixed(2)),
-                })
-              }
-              className="mb-3 w-full rounded-lg bg-emerald-500 px-4 py-2.5 font-bold text-white shadow hover:bg-emerald-600"
+              onClick={onClaim}
+              disabled={!ready || !!claiming}
+              className={`mb-3 w-full rounded-lg px-4 py-2.5 font-bold text-white shadow transition-colors ${
+                ready && !claiming
+                  ? "bg-emerald-500 hover:bg-emerald-600"
+                  : "cursor-not-allowed bg-slate-300 text-slate-500"
+              }`}
             >
-              Claim Rewards (SOL / USDC / Gold)
+              {claiming
+                ? "Claiming…"
+                : ready
+                  ? "Claim Daily Rewards (SOL / USDC / Gold)"
+                  : `Next claim in ${fmt(remainingMs)}`}
             </button>
 
             <button
@@ -69,9 +105,9 @@ export function RealmExchangeModal({ gold, onClaim, onStakeConfirmed, onClose }:
         ) : (
           <>
             <div className="mb-1 text-3xl">🔒</div>
-            <h2 className="text-2xl font-extrabold text-slate-900">Stake $Hunt</h2>
+            <h2 className="text-2xl font-extrabold text-slate-900">Stake $HUNT</h2>
             <p className="mb-4 text-sm text-slate-600">
-              Enter the amount of $Hunt you want to stake. 
+              Enter the amount of $HUNT you want to stake.
             </p>
 
             <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-500">

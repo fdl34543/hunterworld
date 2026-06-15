@@ -22,6 +22,7 @@ import {
   type DbPlayer,
   type DbPlayerItem,
 } from "@/lib/players.functions";
+import { claimRealmReward } from "@/lib/realm.functions";
 
 export function usePlayer() {
   const { token, userId } = useWalletSession();
@@ -200,6 +201,22 @@ export function usePlayer() {
     onSuccess: setPlayer,
   });
 
+  const claimRealmM = useMutation({
+    mutationFn: async () => {
+      return await claimRealmReward();
+    },
+    onSuccess: (res) => {
+      const current = qc.getQueryData<DbPlayer | null>(["player", userId]);
+      if (current) {
+        setPlayer({
+          ...current,
+          gold: res.player.gold,
+          last_realm_claim_at: res.player.last_realm_claim_at,
+        });
+      }
+    },
+  });
+
   return {
     ...query,
     create,
@@ -219,5 +236,6 @@ export function usePlayer() {
     fountain: fountainM,
     farm: farmM,
     beer: beerM,
+    claimRealm: claimRealmM,
   };
 }

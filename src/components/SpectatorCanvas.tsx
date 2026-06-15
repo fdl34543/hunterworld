@@ -42,6 +42,7 @@ export function SpectatorCanvas({ onExit }: Props) {
       equipped_armor: null,
       last_boss_at: null,
       last_boss_at_by_map: null,
+      last_realm_claim_at: null,
       created_at: now,
       updated_at: now,
     };

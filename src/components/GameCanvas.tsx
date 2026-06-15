@@ -154,6 +154,7 @@ export function GameCanvas({
     fountain,
     farm,
     beer,
+    claimRealm,
   } = usePlayer();
   const level = levelFromXp(player.xp);
   const gold = player.gold;
@@ -2239,15 +2240,24 @@ export function GameCanvas({
       {!isSpectator && realmOpen && (
         <RealmExchangeModal
           gold={gold}
-          onClaim={(r) => {
-            // Demo-only claim — no on-chain rewards yet, so no server award.
-            showToast(
-              `Claimed +${r.gold} gold, +${r.sol} SOL, +${r.usdc} USDC`,
-            );
-            setRealmOpen(false);
+          lastClaimAt={
+            player.last_realm_claim_at
+              ? new Date(player.last_realm_claim_at).getTime()
+              : null
+          }
+          claiming={claimRealm.isPending}
+          onClaim={async () => {
+            try {
+              const res = await claimRealm.mutateAsync();
+              const { gold: g, sol, usdc } = res.rewards;
+              showToast(`Claimed +${g} gold, +${sol} SOL, +${usdc} USDC`);
+              setRealmOpen(false);
+            } catch (e: any) {
+              showToast(e?.message ?? "Claim failed");
+            }
           }}
           onStakeConfirmed={(amt) => {
-            showToast(`Staked ${amt} $Realm`);
+            showToast(`Staked ${amt} $Hunt `);
             setRealmOpen(false);
           }}
           onClose={() => setRealmOpen(false)}
