@@ -89,7 +89,7 @@ export function ConnectScreen({ onSpectate }: { onSpectate?: () => void } = {}) 
 
         <div className="flex items-center gap-2">
           <a
-            href="https://x.com"
+            href="https://x.com/HunterWorldRPG"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X (Twitter)"
@@ -97,6 +97,22 @@ export function ConnectScreen({ onSpectate }: { onSpectate?: () => void } = {}) 
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a
+            href="https://t.me/HunterWorldRPG"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Telegram"
+            className="grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-black/60 text-white transition hover:bg-white hover:text-black"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="currentColor"
+              aria-hidden
+            >
+              <path d="M21.944 4.517a1 1 0 0 0-1.09-.163L2.57 11.79a1 1 0 0 0 .09 1.87l4.74 1.58 1.81 5.43a1 1 0 0 0 1.78.25l2.65-3.63 4.9 3.57a1 1 0 0 0 1.57-.63l3-14.7a1 1 0 0 0-.266-.91ZM9.22 14.73l8.79-7.84-6.81 9.3-.74 1.01-.73 1z" />
             </svg>
           </a>
           <button
