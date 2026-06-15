@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { REALM_CLAIM_COOLDOWN_MS } from "@/lib/realm.functions";
 
 // Placeholder contract address — replace with the real one when available.
-export const REALM_CA = "REPLACE_WITH_CONTRACT_ADDRESS";
+export const REALM_CA = "71p7Riw6WyBJmbS1HgSwLbjpNZfBptsDpcc9h9s4pump";
 
 type Props = {
   gold: number;

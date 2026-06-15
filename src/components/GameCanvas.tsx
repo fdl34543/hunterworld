@@ -2250,7 +2250,7 @@ export function GameCanvas({
             try {
               const res = await claimRealm.mutateAsync();
               const { gold: g, sol, usdc } = res.rewards;
-              showToast(`Claimed +${g} gold, +${sol} SOL, +${usdc} USDC`);
+              showToast(`Claimed +${g} gold, +${sol} SOL`);
               setRealmOpen(false);
             } catch (e: any) {
               showToast(e?.message ?? "Claim failed");

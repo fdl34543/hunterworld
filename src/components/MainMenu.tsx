@@ -307,6 +307,9 @@ export function ConnectScreen({ onSpectate }: { onSpectate?: () => void } = {}) 
             <p className="mt-1 text-sm text-white/80 drop-shadow">
               Enter the realm. Forge your legend.
             </p>
+            <p className="mt-1 text-sm text-white/80 drop-shadow">
+              71p7Riw6WyBJmbS1HgSwLbjpNZfBptsDpcc9h9s4pump
+            </p>
           </div>
 
           <div className="mmo-panel rounded-2xl p-5">
